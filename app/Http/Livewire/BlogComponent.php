@@ -20,16 +20,14 @@ class BlogComponent extends Component
     use WithFileUploads;
 
     public $idblog, $titulo, $contenido, $img;
+    public $open = false;
+    public $form_create = true;
     
 
     public function render()
     {
         $blogs = ModelBlog::orderBy('created_at','DESC')->paginate(5);
         return view('livewire.blog.blog-component',['blogs' => $blogs]);
-    }
-
-    public function cerrarform(){
-        $this->form = 'create_blog';
     }
     
     public function store(){
@@ -56,45 +54,73 @@ class BlogComponent extends Component
             
             $this->img->storeAs('blog' , $url_img);
 
-            $this->reset(['titulo', 'contenido', 'img']);
+            $this->limpiarDatos();
 
             session()->flash('store-success', 'ok');
     }
         
     public function edit($id){
 
+        $this->form_create = false;
+        $this->open = true;
+
         $blogold = ModelBlog::find($id);
         $this->idblog  = $blogold->id;
         $this->titulo = $blogold->titulo;
         $this->contenido = $blogold->contenido;
-        $this->img = $blogold->img;
     }
 
     public function update(){
+
         $this->validate([
             'titulo' => 'required',
             'contenido' => 'required',
         ]);
 
-
-            $urlnow  = Str::slug($this->titulo, '-');
-            
+        $urlnow  = Str::slug($this->titulo, '-');
+        
+        if($this->img == ''){
+    
             $blog = ModelBlog::find($this->idblog);
-
+    
             $blog->update([
                 'titulo'    => $this->titulo,
                 'url'       => $urlnow,
                 'contenido' => $this->contenido,
                 ]);
+                
+        }else{
+
+            $random = Str::random(50);
+            $file = $this->img->getClientOriginalName();
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            $url_img = $random.'.'.$extension;
+
+            $blog = ModelBlog::find($this->idblog);
     
-            $this->reset(['titulo', 'contenido', 'img']);
-    
+            $blog->update([
+                'titulo'    => $this->titulo,
+                'url'       => $urlnow,
+                'contenido' => $this->contenido,
+                'img'       => $url_img,
+                ]);
+
+            $this->img->storeAs('blog' , $url_img);
+
+        }
+            $this->limpiarDatos();
             session()->flash('update-success', 'ok');
+            
     }
 
     public function destroy($id){
         ModelBlog::destroy($id);
         session()->flash('delete-success', 'ok');
+    }
+
+    public function limpiarDatos(){
+        $this->reset(['titulo', 'contenido', 'img']);
+        $this->form_open = false;
     }
 }
     

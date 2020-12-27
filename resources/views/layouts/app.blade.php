@@ -17,6 +17,7 @@
   <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
   rel="stylesheet">
   <!-- BEGIN VENDOR CSS-->
+  <link rel="stylesheet" type="text/css" href="/css/style-p.css">
   <link rel="stylesheet" type="text/css" href="/modernadmin/app-assets/css/vendors.css">
   <!-- END VENDOR CSS-->
   <!-- BEGIN MODERN CSS-->
@@ -34,6 +35,10 @@
   <link rel="stylesheet" type="/modernadmin/assets/css/style.css">
   <!-- END Custom CSS-->
 
+  <!-- CDN Alpine.js -->
+  <script src="/js/alpine.min.js" type="text/javascript"></script>
+
+
   @stack('archivos')
   
   @livewireStyles
@@ -42,9 +47,6 @@
 data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
   @livewireScripts
-
-  @stack('modal-create')
-  @stack('modals-edit')
   
   <!-- fixed-top-->
   <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">

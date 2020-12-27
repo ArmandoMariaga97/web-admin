@@ -1,21 +1,24 @@
 <div>
 
-    @include("livewire.blog.create_blog")
-
   @push('archivos')
   <script type="text/javascript" src="/assets/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/toastr/toastr.css">
   <script type="text/javascript" src="/assets/toastr/toastr.js"></script>
   @endpush
+  <script type="text/javascript">
+    $(document).ready(function() {
+        // setTimeout(function() {
+        //     $(".content").fadeOut(1500);
+        // },3000);
+    
+        setTimeout(function() {
+            $(".ocultar-inicial").fadeIn(1500);
+        },100);
+    });
+  </script>
+
 
   <div class="row" id="default">
-
-          <div wire:ignore align="right" style="width:300px; margin:20px;" class="col-md-12 col-12">
-            <button  style="margin-right:20px;" type="button" class="btn btn-success round btn-glow px-2" data-toggle="modal" data-target="#created-modal">
-              Agregar
-            </button>
-          </div>
-
                       
           @if (session()->has('delete-success'))
               <script  type="text/javascript">
@@ -27,7 +30,7 @@
                     $(function(){
                       $('#form-edit-closed').click();
                     });
-                    toastr.warning('Entrada al BLOG ACTUALIZADA correctamente.', 'Bien hecho!!');
+                    toastr.success('Entrada al BLOG ACTUALIZADA correctamente.', 'Bien hecho!!');
               </script>
           @endif
           @if (session()->has('store-success'))
@@ -38,14 +41,16 @@
                     toastr.success('Entrada al BLOG AGREGADA correctamente.', 'Bien hecho!!');
               </script>
           @endif
-          
+
+          @include("livewire.blog.forms_blog")
+
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h2 class="card-title">Entradas al BLOG</h2>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                </div>
+                <!-- <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a> -->
+                <!-- <div class="heading-elements">
+                </div> -->
               </div>
               <div class="card-content collapse show">
                 <div class="table-responsive">
@@ -74,7 +79,7 @@
                                             <buttom class="btn btn-warning" title="Ver Blog"><i class="icon-eye"></i></buttom>
                                         </ul>
                                         <ul>
-                                            <buttom wire:click="edit({{ $blog->id }})" data-toggle="modal" data-target="#edit-modal-{{ $blog->id }}" class="btn btn-success" title="Editar Blog"><i class="icon-note"></i></buttom>
+                                            <a href="#default" wire:click="edit({{ $blog->id }})" class="btn btn-success" title="Editar Blog"><i class="icon-note"></i></a>
                                         </ul>
                                         <ul>
                                             <buttom data-toggle="modal" data-target="#delete-modal-{{ $blog->id }}" class="btn btn-danger" title="Eliminar Blog"><i class="icon-close"></i></buttom>
@@ -82,7 +87,6 @@
                                     </li>
                                 </td>
                             </tr>
-                            @include("livewire.blog.edit_blog")
                             @include("livewire.blog.delete_blog")
 
                         @empty
