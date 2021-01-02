@@ -5,18 +5,6 @@
 	<link rel="stylesheet" type="text/css" href="/assets/toastr/toastr.css">
   <script type="text/javascript" src="/assets/toastr/toastr.js"></script>
   @endpush
-  <script type="text/javascript">
-    $(document).ready(function() {
-        // setTimeout(function() {
-        //     $(".content").fadeOut(1500);
-        // },3000);
-    
-        setTimeout(function() {
-            $(".ocultar-inicial").fadeIn(1500);
-        },100);
-    });
-  </script>
-
 
   <div class="row" id="default">
                       

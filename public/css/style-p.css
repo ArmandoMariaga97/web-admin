@@ -1,0 +1,68 @@
+.file-select {          
+    position: relative;
+    display: inline-block;
+  }
+   
+  .file-select::before {
+    background-color: #28d09e;
+    color: white;
+    font-size: 26px;
+    display: flex;            
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;                
+  }
+   
+  .file-select input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    display: inline-block;            
+  }
+   
+  #src-file1::before {
+    content: 'Seleccionar Archivos';
+  }
+
+  .contenedor-success{
+    border:solid 3px green; 
+    border-radius: 15px;
+    margin:20px;
+    padding: 0px !important;
+  }
+  .contenedor-errors{
+    border:solid 3px red; 
+    border-radius: 15px;
+    margin:20px;
+    padding: 0px !important;
+  }
+
+  .img-errors{
+    width:100%; 
+    border-radius:15px 15px 0 0 ;
+  }
+
+  .img-success{
+    width:100%; 
+    border-radius:15px 15px 0 0 ;
+  }
+
+  .info-success-img{
+      background: #DAFFD8;
+      color: green;
+      padding: 10px;
+      border-radius: 0 0 15px 15px;
+  }
+  .info-errors-img{
+      background: #FFE1E1;
+      color: red;
+      padding: 10px;
+      border-radius: 0 0 15px 15px;
+  }
+  

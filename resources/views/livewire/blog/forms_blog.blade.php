@@ -1,5 +1,5 @@
 
-<div x-data="{open: @entangle('open'), form_create: @entangle('form_create')}" x-init="open = false" class="col-md-12 col-12 mb-2 ocultar-inicial" >
+<div x-data="{open: @entangle('open'), form_create: @entangle('form_create')}" x-init="open = false" class="col-md-12 col-12 mb-2" >
 
     <div x-show="!open" align="right" class="mb-2">
         <button @click="open = !open" style="margin-right:20px;" type="button" class="btn btn-success round btn-glow px-2">

@@ -10,6 +10,8 @@ use Livewire\WithPagination;
 // necesario para la carga de archivos
 use Livewire\WithFileUploads;
 
+use App\ModelGaleria;
+
 class GaleriaComponent extends Component
 {
     // necesario para paginacion en LiveWire, de lo contrari bota error
@@ -17,17 +19,19 @@ class GaleriaComponent extends Component
     //necesario par al accraga de archivos
     use WithFileUploads;
 
-    public $open = false;
-    public $photos = [];
+    public $open    = false;
+    public $photos  = [];
+    public $cont    = 0;
 
     public function render()
     {
-        return view('livewire.galeria.galeria-component');
+        $galerias = ModelGaleria::orderBy('created_at','DESC')->get();
+        return view('livewire.galeria.galeria-component',['galerias' => $galerias]);
     }
 
     public function cargarfotos(){
         $this->validate([
-            'photos.*' => 'image|max:1024',
+            'photos.*' => 'required|image|max:1024',
         ]);
 
         foreach ($this->photos as $photo) {
@@ -38,6 +42,10 @@ class GaleriaComponent extends Component
             $url_img = $random.'.'.$extension;
 
             $photo->storeAs('galeria' , $url_img);
+
+            ModelGaleria::create([
+                'url_img' => $url_img,
+            ]);
         }
 
         $this->reset('photos');
@@ -45,4 +53,9 @@ class GaleriaComponent extends Component
 
 
     }
+
+    public function limpiarphotos(){
+        $this->photos = [];
+    }
+
 }
