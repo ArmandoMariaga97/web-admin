@@ -28,10 +28,10 @@ class GaleriaComponent extends Component
         $galerias = ModelGaleria::orderBy('created_at','DESC')->get();
         return view('livewire.galeria.galeria-component',['galerias' => $galerias]);
     }
-
+       
     public function cargarfotos(){
-        $this->validate([
-            'photos.*' => 'required|image|max:1024',
+            $this->validate([
+                'photos.*' => 'required|image|max:1024',
         ]);
 
         foreach ($this->photos as $photo) {
@@ -52,6 +52,18 @@ class GaleriaComponent extends Component
         session()->flash('photos-success', 'ok');
 
 
+    }
+
+    public function deleteForPhotos($cont){
+        // elimnar elemento del array segun su posicion
+        unset($this->photos[$cont]);
+        // refrescamos el array con las nuevas posiciones
+        $this->photos = array_values($this->photos);
+    }
+
+    public function delete($id){
+        ModelGaleria::destroy($id);
+        session()->flash('delete-img-success', "ok.$id");
     }
 
     public function limpiarphotos(){
