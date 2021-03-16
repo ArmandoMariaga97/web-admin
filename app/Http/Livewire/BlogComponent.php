@@ -26,7 +26,7 @@ class BlogComponent extends Component
 
     public function render()
     {
-        $blogs = ModelBlog::orderBy('created_at','DESC')->paginate(5);
+        $blogs = ModelBlog::orderBy('created_at','DESC')->get();
         return view('livewire.blog.blog-component',['blogs' => $blogs]);
     }
     
@@ -38,25 +38,25 @@ class BlogComponent extends Component
             'img' => 'required|image|max:2048',
         ]);
 
-        $urlnow  = Str::slug($this->titulo, '-');
+         $urlnow  = Str::slug($this->titulo, '-');
 
-        $random = Str::random(50);
-        $file = $this->img->getClientOriginalName();
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        $url_img = $random.'.'.$extension;
+         $random = Str::random(50);
+         $file = $this->img->getClientOriginalName();
+         $extension = pathinfo($file, PATHINFO_EXTENSION);
+         $url_img = $random.'.'.$extension;
         
-        ModelBlog::create([
-            'titulo'    => $this->titulo,
-            'url'       => $urlnow,
-            'contenido' => $this->contenido,
-            'img'       => $url_img,
-            ]);
+         ModelBlog::create([
+             'titulo'    => $this->titulo,
+             'url'       => $urlnow,
+             'contenido' => $this->contenido,
+             'img'       => $url_img,
+             ]);
             
-            $this->img->storeAs('blog' , $url_img);
+             $this->img->storeAs('blog' , $url_img);
 
-            $this->limpiarDatos();
+             $this->limpiarDatos();
 
-            session()->flash('store-success', 'ok');
+             session()->flash('store-success', 'ok');
     }
         
     public function edit($id){
@@ -120,7 +120,8 @@ class BlogComponent extends Component
 
     public function limpiarDatos(){
         $this->reset(['titulo', 'contenido', 'img']);
-        $this->form_open = false;
+        $this->open = false;
+        $this->form_create = true;
     }
 }
     

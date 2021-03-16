@@ -3,17 +3,22 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use Livewire\Component;
 // necesario para la paginacion en LiveWire
 use Livewire\WithPagination;
 // necesario para la carga de archivos
 use Livewire\WithFileUploads;
+// para redimensionar las img
+use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManagerStatic;
 
 use App\ModelGaleria;
 
 class GaleriaComponent extends Component
 {
+    
     // necesario para paginacion en LiveWire, de lo contrari bota error
     use WithPagination;
     //necesario par al accraga de archivos
@@ -30,25 +35,28 @@ class GaleriaComponent extends Component
     }
        
     public function cargarfotos(){
-            $this->validate([
-                'photos.*' => 'required|image|max:1024',
+
+        $this->validate([
+            'photos.*' => 'required|image|max:1024',
         ]);
 
         foreach ($this->photos as $photo) {
 
-            $random = Str::random(50);
-            $file = $photo->getClientOriginalName();
-            $extension = pathinfo($file, PATHINFO_EXTENSION);
-            $url_img = $random.'.'.$extension;
+            $name = Str::random(20).'.jpg';
 
-            $photo->storeAs('galeria' , $url_img);
+            // redimencionamos la img y le cambiamos el formato
+            $img = ImageManagerstatic::make($photo)->widen(500)->encode('jpg');
 
-            ModelGaleria::create([
-                'url_img' => $url_img,
-            ]);
+            // la guardamos en el storage
+            Storage::disk('local')->put($name, $img);
+            
+             ModelGaleria::create([
+                 'url_img' => $name,
+             ]);
         }
 
         $this->reset('photos');
+        $this->open = false;
         session()->flash('photos-success', 'ok');
 
 
@@ -62,7 +70,9 @@ class GaleriaComponent extends Component
     }
 
     public function delete($id){
-        ModelGaleria::destroy($id);
+        $img =  ModelGaleria::find($id);
+        Storage::disk('local')->delete($img->url_img);
+        $img->delete();
         session()->flash('delete-img-success', "ok.$id");
     }
 

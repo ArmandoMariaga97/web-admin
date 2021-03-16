@@ -1,54 +1,33 @@
-<div>
+<div x-data="{open: @entangle('open'), 
+            form_create: @entangle('form_create'),
+}">
 
   @push('archivos')
-  <script type="text/javascript" src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/assets/toastr/toastr.css">
-  <script type="text/javascript" src="/assets/toastr/toastr.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js" defer></script>
   @endpush
 
   <div class="row" id="default">
                       
-          @if (session()->has('delete-success'))
-              <script  type="text/javascript">
-                    toastr.error('Entrada al BLOG ELIMINADA correctamente.', 'Bien hecho!!');
-              </script>
-          @endif
-          @if (session()->has('update-success'))
-              <script  type="text/javascript">
-                    $(function(){
-                      $('#form-edit-closed').click();
-                    });
-                    toastr.success('Entrada al BLOG ACTUALIZADA correctamente.', 'Bien hecho!!');
-              </script>
-          @endif
-          @if (session()->has('store-success'))
-              <script  type="text/javascript">
-                    $(function(){
-                      $('#form-create-closed').click();
-                    });
-                    toastr.success('Entrada al BLOG AGREGADA correctamente.', 'Bien hecho!!');
-              </script>
-          @endif
+          @include("livewire.blog.alerts")
 
           @include("livewire.blog.forms_blog")
 
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h2 class="card-title">Entradas al BLOG</h2>
-                <!-- <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a> -->
-                <!-- <div class="heading-elements">
-                </div> -->
+                <h2 align="center" class="card-title">ENTRADAS AL BLOG</h2>
               </div>
               <div class="card-content collapse show">
                 <div class="table-responsive">
                   <table class="table mb-0">
                     <thead>
-                      <tr>
-                        <th style="width:30%;">Título</th>
-                        <th style="width:60%;">Contenido</th>
-                        <th style="width:10%;" colspan="2">&nbsp;</th>
-                      </tr>
+                      @if($blogs->count() > 0)
+                        <tr>
+                          <th style="width:30%;">Título</th>
+                          <th style="width:60%;">Contenido</th>
+                          <th style="width:10%;" colspan="2">&nbsp;</th>
+                        </tr>
+                      @endif
                     </thead>
                     <tbody>
                         @forelse($blogs as $blog)
@@ -82,7 +61,6 @@
                         @endforelse
                     </tbody>
                   </table>
-                  {{ $blogs->links() }}
                 </div>
               </div>
             </div>

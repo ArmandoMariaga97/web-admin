@@ -1,4 +1,4 @@
-<div x-data="{open: @entangle('open')}" x-init="open = false" class="col-md-12 col-12 " >
+<div x-data="{open: @entangle('open')}" class="col-md-12 col-12 " >
 
   <div x-show="!open" align="right" class="mb-2">
       <button @click="open = !open" style="margin-right:20px;" class="btn btn-success round btn-glow px-2">
@@ -6,13 +6,15 @@
       </button>
   </div>
 
-  <div x-show="open" align="right" class="mb-2">
-      <button @click="open = !open" wire:click="limpiarphotos" style="margin-right:20px;" class="btn btn-danger round btn-glow px-2">
-            Cancelar
-      </button>
-  </div>
+  <template x-if="open" >
+    <div align="right" class="mb-2">
+        <button @click="open = !open" wire:click="limpiarphotos" style="margin-right:20px;" class="btn btn-danger round btn-glow px-2">
+              Cancelar
+        </button>
+    </div>
+  </template>
 
-  <div x-show="open">
+  @if($open)
     <div class="modal-content">
 
       <div class="card-header">
@@ -119,7 +121,7 @@
 
       </div> 
     </div>
-  </div>
+  @endif
 
 </div>
 

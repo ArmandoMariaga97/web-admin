@@ -35,8 +35,12 @@
   <link rel="stylesheet" type="/modernadmin/assets/css/style.css">
   <!-- END Custom CSS-->
 
+  <script type="text/javascript" src="/assets/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/toastr/toastr.css">
+  <script type="text/javascript" src="/assets/toastr/toastr.js"></script>
+
   <!-- CDN Alpine.js -->
-  <script src="/js/alpine.min.js" type="text/javascript"></script>
+  <script src="/js/alpine.min.js" defer></script>
 
 
   @stack('archivos')
@@ -47,6 +51,7 @@
 data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
   @livewireScripts
+  
   
   <!-- fixed-top-->
   <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
