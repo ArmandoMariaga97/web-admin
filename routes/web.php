@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::view('/','index')->name('/');
 Route::view('/admin','admin.index')->middleware('auth')->name('/admin');
+
 Route::view('blog','admin.blog.index')->middleware('auth')->name('blog');
+Route::view('blog-created','admin.blog.created')->middleware('auth')->name('blogcreated');
+Route::view('blog-edit/{{ id }}','admin.blog.created')->middleware('auth')->name('blogedit');
+
 Route::view('galeria','admin.galeria.index')->middleware('auth')->name('galeria');
 Route::view('promociones','admin.promociones.index')->middleware('auth')->name('promociones');
 

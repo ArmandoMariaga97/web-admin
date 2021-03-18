@@ -12,6 +12,9 @@ use Livewire\WithFileUploads;
 
 use App\ModelBlog;
 
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
+
 class BlogComponent extends Component
 {
     // necesario para paginacion en LiveWire, de lo contrari bota error
@@ -30,34 +33,6 @@ class BlogComponent extends Component
         return view('livewire.blog.blog-component',['blogs' => $blogs]);
     }
     
-    public function store(){
-
-        $this->validate([
-            'titulo' => 'required',
-            'contenido' => 'required',
-            'img' => 'required|image|max:2048',
-        ]);
-
-         $urlnow  = Str::slug($this->titulo, '-');
-
-         $random = Str::random(50);
-         $file = $this->img->getClientOriginalName();
-         $extension = pathinfo($file, PATHINFO_EXTENSION);
-         $url_img = $random.'.'.$extension;
-        
-         ModelBlog::create([
-             'titulo'    => $this->titulo,
-             'url'       => $urlnow,
-             'contenido' => $this->contenido,
-             'img'       => $url_img,
-             ]);
-            
-             $this->img->storeAs('blog' , $url_img);
-
-             $this->limpiarDatos();
-
-             session()->flash('store-success', 'ok');
-    }
         
     public function edit($id){
 
@@ -91,30 +66,40 @@ class BlogComponent extends Component
                 
         }else{
 
-            $random = Str::random(50);
-            $file = $this->img->getClientOriginalName();
-            $extension = pathinfo($file, PATHINFO_EXTENSION);
-            $url_img = $random.'.'.$extension;
+            $name = Str::random(20).'.jpg';
+
+            // redimencionamos la img y le cambiamos el formato
+            $img = ImageManagerstatic::make($this->img)->widen(500)->encode('jpg');
+
+            // la guardamos la nueva en el storage
+            Storage::disk('local')->put($name, $img);
 
             $blog = ModelBlog::find($this->idblog);
-    
+            
+            // eliminamos la img anterior
+            Storage::disk('local')->delete($blog->img);
+
             $blog->update([
                 'titulo'    => $this->titulo,
                 'url'       => $urlnow,
                 'contenido' => $this->contenido,
-                'img'       => $url_img,
+                'img'       => $name,
                 ]);
-
-            $this->img->storeAs('blog' , $url_img);
 
         }
             $this->limpiarDatos();
             session()->flash('update-success', 'ok');
+            redirect()->route('blog');
             
     }
 
     public function destroy($id){
-        ModelBlog::destroy($id);
+        $blogItem = ModelBlog::find($id);
+
+        Storage::disk('local')->delete($blogItem->img);
+
+        $blogItem->delete();
+
         session()->flash('delete-success', 'ok');
     }
 
@@ -123,5 +108,10 @@ class BlogComponent extends Component
         $this->open = false;
         $this->form_create = true;
     }
+
+    public function cambiarContent($cont){
+        $this->content = $cont;
+    }
+
 }
     

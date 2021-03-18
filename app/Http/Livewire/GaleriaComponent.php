@@ -70,9 +70,13 @@ class GaleriaComponent extends Component
     }
 
     public function delete($id){
+        
         $img =  ModelGaleria::find($id);
+        // eliminamos el archivo del servidor
         Storage::disk('local')->delete($img->url_img);
+        // eliminamos el archivo de la db
         $img->delete();
+
         session()->flash('delete-img-success', "ok.$id");
     }
 

@@ -21,3 +21,5 @@
           toastr.success('Entrada al BLOG AGREGADA correctamente.', 'Bien hecho!!');
     </script>
 @endif
+
+
