@@ -35,9 +35,9 @@
                     <thead>
                       @if($blogs->count() > 0)
                         <tr>
-                          <th style="max-width:30%;">Título</th>
-                          <th style="max-width:50%;">Contenido</th>
-                          <th style="max-width:20%;" colspan="2">Acción</th>
+                          <th style="width:30%;">Imágen</th>
+                          <th style="width:50%;">Título</th>
+                          <th style="width:20%;" colspan="2">Acción</th>
                         </tr>
                       @endif
                     </thead>
@@ -45,7 +45,6 @@
                         @forelse($blogs as $blog)
                             <tr>
                                 <td  align="center">
-                                  <b>{{ Str::limit($blog->titulo , 80) }} </b>
                                   <br>
                                   <img style="max-width:150px;" src="{{ asset('uploads/'.$blog->img )}}"></img>
                                   <br>
@@ -53,8 +52,7 @@
                                 </td>
 
                                 <td>
-                                  {!! Str::limit($blog->contenido , 500) !!}
-                                  <br>
+                                  <h3><b>{{ Str::limit($blog->titulo , 80) }} </b></h3>
                                 </td>
 
                                 <td  align="center">

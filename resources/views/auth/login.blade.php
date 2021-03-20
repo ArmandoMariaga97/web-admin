@@ -17,6 +17,15 @@
                     <span>Web Admin</span>
                   </h6>
                 </div>
+                @if (session()->has('password_update'))
+                  <div style="max-width:500px; margin-left:auto; margin-right:auto;" class="alert alert-icon-left alert-success alert-dismissible mb-2" role="alert">
+                      <span class="alert-icon"><i class="la la-thumbs-o-up"></i></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">×</span>
+                        </button>
+                      <strong>Actualizacion exitosa!</strong> La contraseña <strong>se actualizó </strong> con exito, por favor inicie sesión nuevamente.
+                  </div>
+                @endif
                 <div class="card-content">
                   <div class="card-body">
                     <form class="form-horizontal"  method="POST" action="{{ route('login') }}">

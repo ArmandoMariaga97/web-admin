@@ -3,12 +3,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
-  <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
-  <meta name="author" content="PIXINVENT">
+  <meta name="viewport" content="Alergólogos Montería">
+  <meta name="description" content="Cuidado de la piel, tratamiento de alergias, infecciones">
+  <meta name="keywords" content="">
+  <meta name="author" content="Armandotuweb.com">
   <title>
-  Web Admin
+  Alergólogos Montería | Web Admin
   </title>
   <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
   <link rel="shortcut icon" type="image/x-icon" href="/modernadmin/app-assets/images/ico/favicon.ico">
@@ -60,9 +60,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
         <ul class="nav navbar-nav flex-row">
           <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
           <li class="nav-item mr-auto">
-            <a class="navbar-brand" href="{{ route('/admin') }}">
-              <img class="brand-logo" alt="modern admin logo" src="/modernadmin/app-assets/images/logo/logo.png">
-              <h3 class="brand-text">Web Admin</h3>
+            <a class="" href="{{ route('/admin') }}">
+              <img width="100%" style="border-radius:8px;" class="brand-logo" alt="modern admin logo" src="/img/logo.png">
             </a>
           </li>
           <!-- <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li> -->
@@ -82,11 +81,12 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <span class="mr-1">Bienvenido,
                   <span class="user-name text-bold-700">{{ auth()->user()->name }}</span>
                 </span>
-                <span class="avatar avatar-online">
-                  <img src="/modernadmin/app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>
+                  <span class="avatar avatar-online contenedor-img-main">
+                    <img class="img-main" src="/img/avatar/{{ auth()->user()->avatar }}" alt="avatar">
+                  </span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#"><i class="ft-user"></i> Perfil</a>
+                <a class="dropdown-item" href="{{ route('perfil') }}"><i class="ft-user"></i> Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" style="background: #ffe4e4; color:red;" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
@@ -122,11 +122,6 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
         <li class=" nav-item">
           <a href="{{ route('galeria') }}"><i class="la la-image"></i>
             <span class="menu-title" data-i18n="nav.support_documentation.main">Galeria</span>
-          </a>
-        </li>
-        <li class=" nav-item">
-          <a href="{{ route('promociones') }}"><i class="la la-gittip"></i>
-            <span class="menu-title" data-i18n="nav.support_documentation.main">Promociones</span>
           </a>
         </li>
 

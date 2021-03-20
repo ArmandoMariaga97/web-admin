@@ -94,3 +94,31 @@
     object-fit: cover;
     filter: brightness(100%);
 }
+.contenedor-img-profile{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.img-profile{
+    width: 128px !important;
+    height: 128px !important;
+    /* margin-bottom: 30px; */
+    object-fit: cover;
+    filter: brightness(100%);
+}
+.contenedor-img-main{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.img-main{
+    width: 35px !important;
+    height: 35px !important;
+    /* margin-bottom: 30px; */
+    object-fit: cover;
+    filter: brightness(100%);
+}

@@ -14,9 +14,16 @@ class Users extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Armando Mariaga Galeano',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin1234')
+                'name' => 'Hernan Ramos',
+                'email' => 'hernan@alergologosmonteria.com',
+                'avatar' => 'default.png',
+                'password' => Hash::make('DoctorHernan#')
+            ]);
+            User::create([
+                'name' => 'Yania Díaz',
+                'email' => 'yania@alergologosmonteria.com',
+                'avatar' => 'default.png',
+                'password' => Hash::make('DraYania#')
         ]);
     }
 }

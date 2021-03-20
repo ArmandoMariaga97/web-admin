@@ -37,7 +37,7 @@ class GaleriaComponent extends Component
     public function cargarfotos(){
 
         $this->validate([
-            'photos.*' => 'required|image|max:1024',
+            'photos.*' => 'required|image|max:2024',
         ]);
 
         foreach ($this->photos as $photo) {
