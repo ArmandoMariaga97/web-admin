@@ -14,16 +14,10 @@ class Users extends Seeder
     public function run()
     {
         User::create([
-                'name' => 'Hernan Ramos',
-                'email' => 'hernan@alergologosmonteria.com',
+                'name' => 'Armando Mariaga',
+                'email' => 'jamg.code07@gmail.com',
                 'avatar' => 'default.png',
-                'password' => Hash::make('DoctorHernan#')
+                'password' => Hash::make('jamg.2022#')
             ]);
-            User::create([
-                'name' => 'Yania Díaz',
-                'email' => 'yania@alergologosmonteria.com',
-                'avatar' => 'default.png',
-                'password' => Hash::make('DraYania#')
-        ]);
     }
 }
